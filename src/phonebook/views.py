@@ -17,19 +17,19 @@ class HomePageView(TemplateView):
         if search_by in ['phone', 'first_name', 'last_name', 'address'] and query:
             if search_by == 'first_name':
                 search_message = f'Searching by "first name" for "{query}"'
-                persones = models.Persone.objects.filter(first_name=query)
+                persones = models.Person.objects.filter(first_name=query)
             elif search_by == 'last_name':
                 search_message = f'Searching by "last name" for "{query}"'
-                persones = models.Persone.objects.filter(last_name=query)
+                persones = models.Person.objects.filter(last_name=query)
             elif search_by == 'address':
                 search_message = f'Searching by "address" for "{query}"'
                 print(search_message)
-                persones = models.Persone.objects.filter(address__contains=query)
+                persones = models.Person.objects.filter(address__contains=query)
             else:
-                persones = models.Persone.objects.filter(phones__phone__startswith=query)
+                persones = models.Person.objects.filter(phone=query)
                 search_message = f'Searching by "phones" for "{query}"'
         else:
-            persones = models.Persone.objects.all()
+            persones = models.Person.objects.all()
 
         context["search_message"] = search_message
         context["persones"] = persones
@@ -37,48 +37,22 @@ class HomePageView(TemplateView):
 
 
 class AddPhoneFormView(CreateView):
-    template_name = 'phonebook/add_persone.html'
-    form_class = forms.CreatePersoneFrom
+    template_name = 'phonebook/add_person.html'
+    form_class = forms.PersonFrom
     success_url = reverse_lazy('home')
 
-    def get_success_url(self) -> str:
-        phone_numbers = self.request.POST.get('phones')
-        for phone_number in phone_numbers.split('\n'):
-            models.Phone.objects.create(phone=phone_number, contact=self.object)
-        return super().get_success_url()
 
 
 class DeletePhoneView(DeleteView):
-    model = models.Persone
-    template_name="phonebook/delete_persone.html"
+    model = models.Person
+    template_name="phonebook/delete_person.html"
     success_url = reverse_lazy('home')
 
 
 class UpdatePhoneView(UpdateView):
     
-    model = models.Persone
-    template_name="phonebook/edit_persone.html"
-    # form_class = forms.EditPersoneForm
+    model = models.Person
+    template_name="phonebook/edit_person.html"
+    form_class = forms.PersonFrom
     success_url = reverse_lazy('home')
-
-    def get_form_class(self):
-        object = self.get_object()
-        phones = [p.phone for p in object.phones.all()]
-        print(f'object = {phones}')
-        return forms.EditPersoneForm
-
-        # (
-        #     instance=self.
-        # )
-
-    # def get_success_url(self) -> str:
-    #     phone_numbers = self.request.POST.get('phones')
-    #     for phone_number in phone_numbers.split('\n'):
-    #         models.Phone.objects.create(phone=phone_number, contact=self.object)
-    #     return super().get_success_url()
-
-
-
-
-
 
