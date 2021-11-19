@@ -10,7 +10,21 @@ class HomePageView(TemplateView):
 
     def get_context_data(self, **kwards):
         context = super().get_context_data(**kwards)
-        context["persones"] = models.Persone.objects.all()
+        search_by = self.request.GET.get('search_by')
+        query = self.request.GET.get('query')
+        search_message = "All phones"
+        if search_by in ['phone', 'name'] and query:
+            if search_by == 'name':
+                search_message = f'Searching by "name" for "{query}"'
+                persones = models.Persone.objects.filter(name=query)
+            else:
+                persones = models.Persone.objects.filter(phones__phone__startswith=query)
+                search_message = f'Searching by "phones" for "{query}"'
+        else:
+            persones = models.Persone.objects.all()
+
+        context["search_message"] = search_message
+        context["persones"] = persones
         return context
 
 
