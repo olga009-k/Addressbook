@@ -58,14 +58,24 @@ class UpdatePhoneView(UpdateView):
     
     model = models.Persone
     template_name="phonebook/edit_persone.html"
-    form_class = forms.EditPersoneForm
+    # form_class = forms.EditPersoneForm
     success_url = reverse_lazy('home')
 
-    def get_success_url(self) -> str:
-        phone_numbers = self.request.POST.get('phones')
-        for phone_number in phone_numbers.split('\n'):
-            models.Phone.objects.create(phone=phone_number, contact=self.object)
-        return super().get_success_url()
+    def get_form_class(self):
+        object = self.get_object()
+        phones = [p.phone for p in object.phones.all()]
+        print(f'object = {phones}')
+        return forms.EditPersoneForm
+
+        # (
+        #     instance=self.
+        # )
+
+    # def get_success_url(self) -> str:
+    #     phone_numbers = self.request.POST.get('phones')
+    #     for phone_number in phone_numbers.split('\n'):
+    #         models.Phone.objects.create(phone=phone_number, contact=self.object)
+    #     return super().get_success_url()
 
 
 

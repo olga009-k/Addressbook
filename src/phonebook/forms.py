@@ -14,7 +14,7 @@ class CreatePersoneFrom(forms.ModelForm):
         )
 
 class EditPersoneForm(forms.ModelForm):
-    phones = forms.CharField(widget=forms.Textarea(),  help_text="separeted by new line '\\n'")
+    phones = forms.CharField(widget=forms.Textarea(),  help_text="separated by new line '\\n'")
     class Meta:
         model = models.Persone
         fields = (
