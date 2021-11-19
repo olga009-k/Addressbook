@@ -4,9 +4,18 @@ from django.db import models
 
 
 class Persone(models.Model):
-    name = models.CharField("Contact name", max_length=50)
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
+    address = models.CharField(max_length=100)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['first_name', 'last_name'], name='Full name')
+        ]
+
     def __str__(self):
-        return self.name
+        return '%s %s %s' % (self.first_name, self.last_name, self.address)
+
 
     def all_phones_to_string(self):
         return ", ".join([phone.phone for phone in self.phones.all()])

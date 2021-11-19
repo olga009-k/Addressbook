@@ -22,10 +22,10 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link"  href="{% url 'home' %}">All</a>
+              <a class="nav-link active"  href="{% url 'home' %}">All</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" href="{% url 'add' %}">Add</a>
+              <a class="nav-link" href="{% url 'add' %}">Add</a>
             </li>
           </ul>
         </div>
@@ -39,8 +39,34 @@
                 <form action="" method="get">
                   <div class="form-group form-row">
                     <div class="col-10">
-                      <input type="text" class="form-control" name="query" placeholder="Search by name">
-                      <input type="hidden" name="search_by" value="name">
+                      <input type="text" class="form-control" name="query" placeholder="Search by first name">
+                      <input type="hidden" name="search_by" value="first_name">
+                    </div>
+                    <div class="col-2">
+                      <button type="submit" class="btn btn-success">Search</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="col-6">
+                <form action="" method="get">
+                  <div class="form-group form-row">
+                    <div class="col-10">
+                      <input type="text" class="form-control" name="query" placeholder="Search by last name">
+                      <input type="hidden" name="search_by" value="last_name">
+                    </div>
+                    <div class="col-2">
+                      <button type="submit" class="btn btn-success">Search</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="col-6">
+                <form action="" method="get">
+                  <div class="form-group form-row">
+                    <div class="col-10">
+                      <input type="text" class="form-control" name="query" placeholder="Search by address">
+                      <input type="hidden" name="search_by" value="address">
                     </div>
                     <div class="col-2">
                       <button type="submit" class="btn btn-success">Search</button>
@@ -74,7 +100,9 @@
               <thead>
               <tr>
                   <th scope="col">#</th>
-                  <th scope="col">Name</th>
+                  <th scope="col">First name</th>
+                  <th scope="col">Last name</th>
+                  <th scope="col">Address</th>
                   <th scope="col">Phones</th>
                   <th scope="col">Actions</th>
               </tr>
@@ -83,9 +111,14 @@
               {% for persone in persones %}
                   <tr>
                       <th scope="row">{{ persone.pk }}</th>
-                      <td>{{ persone.name }}</td>
+                      <td>{{ persone.first_name }}</td>
+                      <td>{{ persone.last_name }}</td>
+                      <td>{{ persone.address }}</td>
                       <td>{{ persone.all_phones_to_string }}</td>
-                      <td><a class="btn btn-sm btn-danger" href="{% url 'delete' persone.pk %}">Delete</a></td>
+                      <td>
+                        <a class="btn btn-sm btn-warning" href="{% url 'edit' persone.pk %}">Edit</a>
+                        <a class="btn btn-sm btn-danger" href="{% url 'delete' persone.pk %}">Delete</a>
+                      </td>
                   </tr>
               {% endfor %}
               </tbody>

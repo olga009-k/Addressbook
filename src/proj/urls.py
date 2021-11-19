@@ -22,6 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('add/', views.AddPhoneFormView.as_view(), name='add'),
     path('delete/<int:pk>', views.DeletePhoneView.as_view(), name='delete'),
+    path('edit/<int:pk>', views.UpdatePhoneView.as_view(), name='edit'),
     path('', views.HomePageView.as_view(), name="home")
 
 ]

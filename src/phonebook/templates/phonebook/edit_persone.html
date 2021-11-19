@@ -25,17 +25,17 @@
                     <a class="nav-link"  href="{% url 'home' %}">All</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="{% url 'add' %}">Add</a>
+                    <a class="nav-link active" href="{% url 'add' %}">Add</a>
                   </li>
                 </ul>
               </div>
             </div>
           </nav>
-          <h1>Are you shure? {{ object.last_name}} {{ object.first_name}} is about to be deleted...</h1>
-
+          <h1>Create new contact</h1>
           <form action="", method="post">
             {% csrf_token %}
-            <button type="submit" class = "btn btn-danger">Delete</button>
+            {{ form|crispy }}
+            <button type="submit" class = "btn btn-success">Submit</button>
           </form>
 
     </div>
