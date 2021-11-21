@@ -1,7 +1,7 @@
 from django.test import TestCase
-from phonebook.models import Person
-from phonebook.views import AddPhoneFormView, HomePageView
-import phonebook.forms
+from addressbook.models import Person
+from addressbook.views import AddPhoneFormView, HomePageView
+import addressbook.forms
 from django.urls import reverse_lazy
 
 
