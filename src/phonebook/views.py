@@ -9,9 +9,12 @@ class HomePageView(TemplateView):
     template_name = 'phonebook/home.html'
 
     def get_context_data(self, **kwards):
+        print(self)
         context = super().get_context_data(**kwards)
         search_by = self.request.GET.get('search_by')
+        print(search_by)
         query = self.request.GET.get('query')
+        print(query)
         search_message = "All phones"
         if search_by in ['phone', 'first_name', 'last_name', 'address'] and query:
             if search_by == 'first_name':
@@ -22,7 +25,6 @@ class HomePageView(TemplateView):
                 persones = models.Person.objects.filter(last_name=query)
             elif search_by == 'address':
                 search_message = f'Searching by "address" for "{query}"'
-                print(search_message)
                 persones = models.Person.objects.filter(address__contains=query)
             else:
                 persones = models.Person.objects.filter(phone=query)

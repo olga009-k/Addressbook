@@ -42,5 +42,3 @@ class PersonFrom(forms.ModelForm):
     def clean_url(self):
         url = self.cleaned_data.get('url', False)
         return validate_website_url(url)
-
-
