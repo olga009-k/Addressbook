@@ -104,6 +104,7 @@
                   <th scope="col">Last name</th>
                   <th scope="col">Address</th>
                   <th scope="col">Phone</th>
+                  <th scope="col">Url</th>
                   <th scope="col">Actions</th>
               </tr>
               </thead>
@@ -115,6 +116,7 @@
                       <td>{{ person.last_name }}</td>
                       <td>{{ person.address }}</td>
                       <td>{{ person.phone}}</td>
+                      <td>{{ person.url}}</td>
                       <td>
                         <a class="btn btn-sm btn-warning" href="{% url 'edit' person.pk %}">Edit</a>
                         <a class="btn btn-sm btn-danger" href="{% url 'delete' person.pk %}">Delete</a>

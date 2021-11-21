@@ -1,0 +1,5 @@
+faker
+django-base64field
+requests
+numpy
+pillow

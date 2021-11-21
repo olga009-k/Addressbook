@@ -13,7 +13,6 @@ class HomePageView(TemplateView):
         search_by = self.request.GET.get('search_by')
         query = self.request.GET.get('query')
         search_message = "All phones"
-        print('test', search_by)
         if search_by in ['phone', 'first_name', 'last_name', 'address'] and query:
             if search_by == 'first_name':
                 search_message = f'Searching by "first name" for "{query}"'
@@ -42,7 +41,6 @@ class AddPhoneFormView(CreateView):
     success_url = reverse_lazy('home')
 
 
-
 class DeletePhoneView(DeleteView):
     model = models.Person
     template_name="phonebook/delete_person.html"
@@ -55,4 +53,3 @@ class UpdatePhoneView(UpdateView):
     template_name="phonebook/edit_person.html"
     form_class = forms.PersonFrom
     success_url = reverse_lazy('home')
-
