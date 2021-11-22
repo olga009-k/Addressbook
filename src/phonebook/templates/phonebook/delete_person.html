@@ -31,7 +31,7 @@
               </div>
             </div>
           </nav>
-          <h1>Are you sure? {{ object.last_name}} {{ object.first_name}} is about to be deleted...</h1>
+          <h1>Are you sure you want to delete "{{ object.last_name}} {{ object.first_name}}"?</h1>
 
           <form action="", method="post">
             {% csrf_token %}

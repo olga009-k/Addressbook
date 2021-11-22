@@ -1,5 +1,5 @@
 from django.db import models
-from django_base64field.fields import Base64Field
+
 
 # Create your models here.
 
