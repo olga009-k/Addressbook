@@ -2,7 +2,7 @@
 
 This is a simple Address Book Application to store contacts and manipulate them
 
-![](./screenshot/image.svg)
+![](screenshot/image.svg)
 
 
 ## Install 
